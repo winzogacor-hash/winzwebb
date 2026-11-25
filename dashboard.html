@@ -1,0 +1,578 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4e7d0">
+<title>WINZ Security Dashboard</title><style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f4e7d0;
+    --black: #111;
+    --white: #fffdf7;
+    --yellow: #ffd400;
+    --red: #ff3b30;
+    --cyan: #00e5ff;
+    --green: #00a86b;
+    --purple: #b56cff;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 18px;
+}
+
+/* HEADER */
+
+.header {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-box {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: var(--red);
+    border: 4px solid var(--black);
+    box-shadow: 6px 6px 0 var(--black);
+    font-size: 22px;
+    font-weight: 1000;
+}
+
+.logo-text h1 {
+    font-size: clamp(25px, 6vw, 40px);
+    font-weight: 1000;
+    letter-spacing: -2px;
+}
+
+.logo-text p {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.menu {
+    width: 52px;
+    height: 52px;
+    border: 4px solid var(--black);
+    background: var(--yellow);
+    box-shadow: 5px 5px 0 var(--black);
+    font-size: 24px;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+/* STATUS */
+
+.status {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: var(--green);
+    border: 4px solid var(--black);
+    box-shadow: 8px 8px 0 var(--black);
+    padding: 16px 18px;
+    margin-bottom: 30px;
+}
+
+.status strong {
+    font-size: 18px;
+    font-weight: 1000;
+}
+
+.status span {
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.status-dot {
+    width: 16px;
+    height: 16px;
+    border: 3px solid var(--black);
+    background: #fff;
+    display: inline-block;
+    margin-right: 7px;
+    vertical-align: middle;
+}
+
+/* STATS */
+
+.stats {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--white);
+    border: 4px solid var(--black);
+    box-shadow: 7px 7px 0 var(--black);
+    padding: 20px;
+}
+
+.stat-card:nth-child(1) {
+    background: var(--cyan);
+}
+
+.stat-card:nth-child(2) {
+    background: var(--yellow);
+}
+
+.stat-card:nth-child(3) {
+    background: var(--purple);
+}
+
+.stat-card:nth-child(4) {
+    background: var(--red);
+    color: white;
+}
+
+.stat-title {
+    font-size: 12px;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.stat-number {
+    font-size: clamp(35px, 7vw, 55px);
+    font-weight: 1000;
+    line-height: 1;
+    margin-top: 12px;
+}
+
+.stat-small {
+    font-size: 11px;
+    font-weight: 900;
+    margin-top: 8px;
+}
+
+/* CONTENT */
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 22px;
+}
+
+.panel {
+    background: var(--white);
+    border: 4px solid var(--black);
+    box-shadow: 8px 8px 0 var(--black);
+    padding: 22px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 4px solid var(--black);
+    padding-bottom: 14px;
+    margin-bottom: 15px;
+}
+
+.panel-title {
+    font-size: 20px;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.badge {
+    border: 3px solid var(--black);
+    background: var(--yellow);
+    padding: 6px 9px;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+/* ACTIVITY */
+
+.activity {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    border: 3px solid var(--black);
+    padding: 12px;
+    background: #fff;
+}
+
+.event-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--black);
+    font-weight: 1000;
+}
+
+.event-icon.green {
+    background: var(--green);
+}
+
+.event-icon.red {
+    background: var(--red);
+    color: white;
+}
+
+.event-icon.yellow {
+    background: var(--yellow);
+}
+
+.event-info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 1000;
+}
+
+.event-info small {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.event-time {
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+/* SECURITY */
+
+.security-box {
+    border: 4px solid var(--black);
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.security-box:last-child {
+    margin-bottom: 0;
+}
+
+.security-box h3 {
+    font-size: 15px;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.security-value {
+    font-size: 28px;
+    font-weight: 1000;
+    margin-top: 8px;
+}
+
+.progress {
+    width: 100%;
+    height: 18px;
+    border: 3px solid var(--black);
+    margin-top: 10px;
+    background: white;
+}
+
+.progress-inner {
+    height: 100%;
+    width: 82%;
+    background: var(--green);
+}
+
+/* MENU */
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    background: var(--white);
+    border-left: 4px solid var(--black);
+    padding: 25px;
+    z-index: 20;
+    transition: right .2s ease;
+    box-shadow: -8px 0 0 var(--black);
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.side-menu h2 {
+    font-size: 25px;
+    font-weight: 1000;
+    margin-bottom: 25px;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 14px;
+    border: 3px solid var(--black);
+    background: var(--yellow);
+    box-shadow: 4px 4px 0 var(--black);
+    margin-bottom: 14px;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: var(--cyan);
+}
+
+.close {
+    background: var(--red);
+    color: white;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .content {
+        gap: 18px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .event {
+        grid-template-columns: 38px 1fr;
+    }
+
+    .event-time {
+        display: none;
+    }
+}
+</style></head><body><header class="header"><div class="logo">
+    <div class="logo-box">W</div>
+
+    <div class="logo-text">
+        <h1>WINZ</h1>
+        <p>Security Control Panel</p>
+    </div>
+</div>
+
+<button class="menu" onclick="toggleMenu()">⋮</button>
+
+</header><section class="status"><div>
+    <strong>
+        <span class="status-dot"></span>
+        SYSTEM SECURE
+    </strong>
+    <br>
+    <span>Security monitoring is active</span>
+</div>
+
+<strong>ONLINE</strong>
+
+</section><section class="stats"><div class="stat-card">
+    <div class="stat-title">Visitors</div>
+    <div class="stat-number">24</div>
+    <div class="stat-small">Today</div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">Login</div>
+    <div class="stat-number">8</div>
+    <div class="stat-small">Successful</div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">Blocked</div>
+    <div class="stat-number">12</div>
+    <div class="stat-small">Requests</div>
+</div>
+
+<div class="stat-card">
+    <div class="stat-title">Threats</div>
+    <div class="stat-number">2</div>
+    <div class="stat-small">Detected</div>
+</div>
+
+</section><main class="content"><section class="panel">
+
+    <div class="panel-header">
+        <div class="panel-title">Activity Log</div>
+        <div class="badge">LIVE</div>
+    </div>
+
+    <div class="activity">
+
+        <div class="event">
+            <div class="event-icon green">✓</div>
+
+            <div class="event-info">
+                <strong>Successful Login</strong>
+                <small>User authenticated successfully</small>
+            </div>
+
+            <div class="event-time">18:02</div>
+        </div>
+
+
+        <div class="event">
+            <div class="event-icon yellow">!</div>
+
+            <div class="event-info">
+                <strong>Suspicious Request</strong>
+                <small>Request rejected by security filter</small>
+            </div>
+
+            <div class="event-time">17:58</div>
+        </div>
+
+
+        <div class="event">
+            <div class="event-icon red">×</div>
+
+            <div class="event-info">
+                <strong>Failed Login</strong>
+                <small>Authentication attempt rejected</small>
+            </div>
+
+            <div class="event-time">17:51</div>
+        </div>
+
+
+        <div class="event">
+            <div class="event-icon green">✓</div>
+
+            <div class="event-info">
+                <strong>Page Access</strong>
+                <small>Dashboard accessed</small>
+            </div>
+
+            <div class="event-time">17:46</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="panel-header">
+        <div class="panel-title">Security</div>
+        <div class="badge">ACTIVE</div>
+    </div>
+
+
+    <div class="security-box">
+
+        <h3>Protection Level</h3>
+
+        <div class="security-value">82%</div>
+
+        <div class="progress">
+            <div class="progress-inner"></div>
+        </div>
+
+    </div>
+
+
+    <div class="security-box">
+
+        <h3>Rate Limiter</h3>
+
+        <div class="security-value">ON</div>
+
+    </div>
+
+
+    <div class="security-box">
+
+        <h3>Telegram Monitor</h3>
+
+        <div class="security-value">READY</div>
+
+    </div>
+
+</section>
+
+</main><!-- SIDE MENU --><aside class="side-menu" id="sideMenu"><h2>MENU</h2>
+
+<button class="menu-item">
+    Dashboard
+</button>
+
+<button class="menu-item">
+    Activity Logs
+</button>
+
+<button class="menu-item">
+    Security Center
+</button>
+
+<button class="menu-item">
+    Settings
+</button>
+
+<button class="menu-item close" onclick="toggleMenu()">
+    CLOSE ×
+</button>
+
+</aside><script>
+
+function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    menu.classList.toggle("open");
+}
+
+</script></body>
+</html>
